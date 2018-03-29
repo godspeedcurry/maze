@@ -2,7 +2,6 @@
 Point start, end;
 int m;
 int n;
-//Point start, end;
 int a[100][100];
 int flag; //0 means we can't find the route ,1 means we can find the route
 void dfs(int x, int y) {
