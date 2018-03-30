@@ -12,4 +12,5 @@ typedef struct point {
 }Point;
 void draw(int, int,int,int,int,int);
 int create(int, int);
+void walk(int,int);
 #endif

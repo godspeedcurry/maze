@@ -2,7 +2,9 @@
 #include "stdafx.h"
 #include "graphics.h"
 extern int a[][100];
-void draw(int m,int n,int start_x,int start_y,int end_x,int end_y) {
+extern void walk(int, int);
+void draw(int m, int n, int start_x, int start_y, int end_x, int end_y) {
+	setrendermode(RENDER_MANUAL);
 	//根据数组绘制图形界面
 	//初始化画布颜色
 	initgraph((n + 2) * 50, (m + 2) * 50);
@@ -22,7 +24,7 @@ void draw(int m,int n,int start_x,int start_y,int end_x,int end_y) {
 			}
 			setcolor(BLACK);
 			line(50 * x, 50, 50 * x, (m + 2) * 50);
-			if (y == start_x&&x == start_y) {
+			if (y == start_x && x == start_y) {
 				setfillcolor(EGERGB(91, 198, 255));
 				bar(x * 50, y * 50, x * 50 + 50, y * 50 + 50);
 				setcolor(EGERGB(0x00, 0x00, 0x00));
@@ -38,7 +40,7 @@ void draw(int m,int n,int start_x,int start_y,int end_x,int end_y) {
 				//要使用特殊格式化字符请用outtextrect
 				outtextxy(x * 50 + 19, y * 50 + 19, "起");
 			}
-			else if (y == end_x&&x == end_y) {
+			else if (y == end_x && x == end_y) {
 				setfillcolor(EGERGB(91, 198, 255));
 				bar(x * 50, y * 50, x * 50 + 50, y * 50 + 50);
 				setcolor(EGERGB(0x00, 0x00, 0x00));
@@ -99,9 +101,20 @@ void draw(int m,int n,int start_x,int start_y,int end_x,int end_y) {
 
 		}
 	}
+	int k = 0;
+	for (; k != key_esc; ) // key_esc是ege定义的按键常数
+	{
+		char str[32];
+		//等待用户按键，并把得到的按键给k
+		//如果你不想等待，可以在调用getch之前，使用kbhit检测是否有按键按下
+		//如 if ( kbhit() ) k = getch();
+		k = getch();
+		if (k == 'w') {
+			walk(1, 1);
+		}
+		//格式化输出为字符串，用于后面输出
 
-	getch();
-	/*delimage(pathway);*/
+	}
 	closegraph();
 
 }
